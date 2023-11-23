@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   token: '',
+  error: '',
 };
 
 export const tokenSlice = createSlice({
@@ -9,9 +10,13 @@ export const tokenSlice = createSlice({
   initialState,
   reducers: {
     updateToken: (state, action) => {
-      state.token = action.token;
+      state.token = action.payload.token;
+    },
+    deleteToken: (state) => {
+      state.token = '';
     },
     tokenRequest: (state) => {
+      state.error = '';
     },
     tokenRequestSuccess: (state, action) => {
       state.token = action.payload.token;
@@ -19,9 +24,6 @@ export const tokenSlice = createSlice({
     tokenRequestError: (state, action) => {
       state.error = action.payload.error;
     },
-    // updateToken: (state, action) => {
-    //   state.token = action.token;
-    // }
   }
 });
 

@@ -1,9 +1,17 @@
 import axios from 'axios';
-// import { setToken } from '../../api/token';
+import { setToken } from '../../api/token';
 import { tokenSlice } from './tokenSlice';
 
 export const tokenMiddleware = store => next => action => {
   console.log('action: ', action);
+  if (action.type === tokenSlice.actions.tokenRequestSuccess) {
+    setToken(action.token);
+  }
+  if (action.type === tokenSlice.actions.deleteToken) {
+    console.log('delete'); // Почему не работает?????
+    setToken('');
+  }
+  next(action);
 };
 
 export const tokenRequestAsync = (urlToken) => (dispatch, getState) => {

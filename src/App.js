@@ -6,7 +6,7 @@ import { tokenSlice } from './store/token/tokenSlice';
 export const App = () => {
   const token = getToken();
   const dispatch = useDispatch();
-  dispatch(tokenSlice.actions.updateToken(token));
+  dispatch(tokenSlice.actions.updateToken({ token }));
 
   return (
     <div className="App">
