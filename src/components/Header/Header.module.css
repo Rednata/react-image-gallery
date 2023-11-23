@@ -1,0 +1,33 @@
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  padding-top: 20px;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 36px;
+  color: #edcd51;
+  margin: 0;  
+}
+
+@media (max-width: 650px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 30px;
+  }
+}
