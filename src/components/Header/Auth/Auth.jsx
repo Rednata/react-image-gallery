@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { urlAuthCode } from '../../../api/auth';
 import { useToken } from '../../../hooks/useToken';
 import style from './Auth.module.css';
@@ -15,13 +16,9 @@ export const Auth = () => {
   const auth = useAuth();
   const dispatch = useDispatch();
 
-  console.log('token: ', token);
-  console.log('auth: ', auth);
-
   const [outBtn, setOutBtn] = useState(false);
 
   const getOut = () => {
-    console.log('out');
     dispatch(authSlice.actions.clearAuth());
     dispatch(tokenSlice.actions.deleteToken());
   };

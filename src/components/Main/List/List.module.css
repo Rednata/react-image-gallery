@@ -1,0 +1,31 @@
+.list {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.myMasonryGrid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  /* margin-left: -30px; */
+  width: auto;
+}
+.myMasonryGrid_column {
+  /* padding-left: 30px; */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.myMasonryGrid_column > div { /* change div to reference your elements you put in <Masonry> */
+  /* background: grey; */
+  /* margin-bottom: 30px; */
+}
+
+.endlist {
+  border: 1px solid red;
+}

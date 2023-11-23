@@ -15,10 +15,10 @@ export const authRequestAsync = () => (dispatch, getState) => {
     .then(({ data: { username, profile_image: profileImg } }) => {
       const imgIcon = profileImg.small.replace(/\?.*$/, '');
       const auth = { username, imgIcon };
-      console.log('auth: ', auth);
       dispatch(authSlice.actions.authRequestSuccess({ auth }));
     })
     .catch(error => {
       dispatch(authSlice.actions.authRequestError({ error }));
     });
 };
+

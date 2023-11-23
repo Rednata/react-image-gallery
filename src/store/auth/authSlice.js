@@ -23,6 +23,17 @@ export const authSlice = createSlice({
       state.auth = {};
       state.error = action.payload.error;
     },
+    likedRequest: (state) => {
+      state.error = '';
+    },
+    likedRequestSuccess: (state, action) => {
+      state.liked = action.payload.data;
+      state.error = '';
+    },
+    likedRequestError: (state, action) => {
+      state.auth = {};
+      state.error = action.payload.error;
+    },
   }
 });
 

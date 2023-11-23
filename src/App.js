@@ -1,6 +1,9 @@
 import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import { getToken } from './api/token';
-import { Header } from './components/Header/Header';
+import Header from './components/Header';
+import Main from './components/Main';
+import UserImg from './components/UserImg';
 import { tokenSlice } from './store/token/tokenSlice';
 
 export const App = () => {
@@ -9,9 +12,19 @@ export const App = () => {
   dispatch(tokenSlice.actions.updateToken({ token }));
 
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <Routes>
+      <Route path='*' element = {
+        <>
+          <Header />
+          <Main />
+        </>
+      }>
+      </Route>
+      <Route path='/img#:id'>
+        <UserImg />
+
+      </Route>
+    </Routes>
   );
 };
 

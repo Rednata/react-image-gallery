@@ -8,7 +8,7 @@ export const tokenMiddleware = store => next => action => {
     setToken(action.token);
   }
   if (action.type === tokenSlice.actions.deleteToken) {
-    console.log('delete'); // Почему не работает?????
+    // Почему не работает?????
     setToken('');
   }
   next(action);
@@ -20,7 +20,6 @@ export const tokenRequestAsync = (urlToken) => (dispatch, getState) => {
     method: 'POST'
   })
     .then(({ data: { access_token: token } }) => {
-      console.log(token);
       localStorage.setItem('token', token);
       dispatch(tokenSlice.actions.tokenRequestSuccess({ token }));
     })

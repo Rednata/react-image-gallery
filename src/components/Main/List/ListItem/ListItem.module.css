@@ -1,0 +1,85 @@
+.item {  
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #2D2D2D;
+  /* width: 32.8%; */
+  border-radius: 10px;
+  /* border: 1px solid red; */
+}
+
+.img{
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.info {
+  position: absolute;
+  bottom: 8px;
+  width: 94%;
+  font-size: 14px;
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author {
+  display: block;
+}
+
+.date {
+  flex-grow: 1;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  /* gap: 10px; */
+  /* padding-left: 15px; */
+  /* border: 1px solid red; */
+}
+
+.like__button {  
+  background-color: transparent;
+  border: none;
+  line-height: 0;
+  color: #fff;
+  cursor: pointer;
+  /* padding: 10px; */
+}
+
+/* .like__button_active {
+  color: red;
+}
+
+svg {
+  width: 25px;
+  height: 25px;
+} */
+
+/* svg_active {
+  fill: red;
+} */
+/* svg:hover {
+  fill: rgba(255, 0, 0, 1);  
+} */
+
+@media (max-width: 860px) {
+  .item {
+    /* width: 49%; */
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    /* width: 100%; */
+  }
+}
