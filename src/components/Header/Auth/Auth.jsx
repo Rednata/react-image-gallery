@@ -13,7 +13,7 @@ import { tokenSlice } from '../../../store/token/tokenSlice';
 export const Auth = () => {
   // const token = useSelector(state => state.token.token);
   const token = useToken();
-  const auth = useAuth();
+  const { auth } = useAuth();
   const dispatch = useDispatch();
 
   const [outBtn, setOutBtn] = useState(false);

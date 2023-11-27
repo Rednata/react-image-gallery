@@ -1,24 +1,25 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { URL_API } from '../../api/const';
 import { likedSlice } from './likedSlice';
 
-export const likedRequestAsync = () => (dispatch, getState) => {
+export const likedPostRequestAsync = (id, methed) => (dispatch, getState) => {
+  const method = methed ? 'POST' : 'DELETE';
   const token = getState().token.token;
-  const auth = getState().auth.auth;
+  const posts = getState().posts.posts;
 
-  if (!auth.username) return;
-
-  dispatch(likedSlice.actions.likedRequest());
-
-  axios(`${URL_API}users/${auth.username}/likes`, {
+  dispatch(likedSlice.actions.likedPostRequest());
+  axios(`${URL_API}photos/${id}/like`, {
+    method,
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
-    .then(({ data }) => {
-      console.log('dataLIKED', data);
-      dispatch(likedSlice.actions.likedRequestSuccess({ data }));
+    .then(({ data: { photo } }) => {
+      console.log('posts: ', posts);
+      dispatch(likedSlice.actions.likedPostRequestSuccess({ photo }));
+      const data = { likes: photo.likes, liked_by_user: photo.liked_by_user };
+      dispatch(likedSlice.actions.updatePostLiked({ data }));
     })
-    .catch(error => dispatch(likedSlice.actions.likedRequestError({ error })));
+    .catch(error => console.log(error));
 };
-

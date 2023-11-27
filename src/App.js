@@ -20,9 +20,9 @@ export const App = () => {
         </>
       }>
       </Route>
-      <Route path='/img#:id'>
+      <Route path='/img/:id' element = {
         <UserImg />
-
+      }>
       </Route>
     </Routes>
   );

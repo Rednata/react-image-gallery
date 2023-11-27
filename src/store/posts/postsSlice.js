@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
   posts: [],
@@ -12,6 +12,7 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     postsRequest: (state) => {
+      console.log('state: ', state);
       state.loading = true;
     },
     postsRequestSuccess: (state, action) => {
@@ -22,6 +23,21 @@ export const postsSlice = createSlice({
     },
     postsRequestError: (state, action) => {
       state.loading = false;
+      state.error = action.payload.error;
+    },
+    updatePostLiked: (state, action) => {
+      console.log('action: ', action);
+      const temp = current(state);
+      console.log('temp: ', temp);
+      console.log(
+        '[action.payload.likePostIndex] ==', action.payload.likePostIndex,
+        typeof action.payload.likePostIndex);
+      console.log('temp.posts[action.likePostIndex.likePostIndex].liked',
+        temp.posts[action.payload.likePostIndex].liked);
+      console.log('action.payload.like === ', action.payload.like);
+      temp.posts[action.payload.likePostIndex].liked = action.payload.like;
+      state.loading = false;
+      state.posts = [...temp];
       state.error = '';
     },
   }

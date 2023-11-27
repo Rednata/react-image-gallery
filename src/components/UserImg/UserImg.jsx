@@ -1,51 +1,34 @@
 /* eslint-disable max-len */
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import style from './UserImg.module.css';
-// import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import { usePostID } from '../../hooks/usePostID';
+import { useGetPostByID } from '../../hooks/useGetPostByID';
 import { ReactComponent as BackIcon } from './img/back.svg';
-import { URL_API } from '../../api/const';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { likedPostRequestAsync } from '../../store/liked/likedAction';
 
 export const UserImg = () => {
-
-};
-
-export const UserImg1 = () => {
   const { id } = useParams();
-  console.log(' id: ', id);
-  const { img, author, date, likes, linkAuthor } = usePostID(id);
-  const token = useSelector(state => state.token.token);
-  console.log('token: ', token);
+  const { img, author, date, linkAuthor } = useGetPostByID(id);
 
-  const [like, setLike] = useState(false);
-  const [classnameBtn, setClassnameBtn] = useState(style.like__button);
+  const dispatch = useDispatch();
+
+  const { likes, liked_by_user: liked } = useSelector(state => state.liked.liked);
+  console.log('likes: ', likes);
+  console.log('liked: ', liked);
+
+  const [like, setLike] = useState(liked);
+  const [changeLikes, setChangeLikes] = useState(false);
+
   const handleClick = () => {
     setLike(!like);
-    setClassnameBtn(style.like__button_active);
+    setChangeLikes(true);
   };
 
   useEffect(() => {
-    // if (!token) return;
-
-    try {
-      fetch(`${URL_API}photos/${id}/like`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`
-          // Authorization: `Bearer 7qv5rE7a3LKLU8_2-mSl7KxamH1WpprJ50EH3yO01Xg`
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('returnData ==', data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    if (!changeLikes) return;
+    dispatch(likedPostRequestAsync(id, like));
   }, [like]);
 
   return (
@@ -57,7 +40,7 @@ export const UserImg1 = () => {
           <p className={style.date} >{date}</p>
           <p className={style.like}>
             <button
-              className={classnameBtn}
+              className={ like ? style.like__button_active : style.like__button}
               onClick={handleClick}
             >
               <svg width="30" height="30" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,14 +53,7 @@ export const UserImg1 = () => {
           <BackIcon width={45} height={45} />
         </a>
       </div>
-    </div>);
+    </div>
+  );
 };
 
-UserImg.propTypes = {
-  data: PropTypes.object,
-  img: PropTypes.string,
-  author: PropTypes.string,
-  date: PropTypes.string,
-  likes: PropTypes.number,
-  linkAuthor: PropTypes.string,
-};

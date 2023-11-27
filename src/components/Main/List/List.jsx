@@ -42,11 +42,11 @@ export const List = () => {
         className={style.myMasonryGrid}
         columnClassName={style.myMasonryGrid_column}
       >
-        {
+        { !posts ? <p> LOADING....</p> :
           posts.map(data => (
             <ListItem
               data={data}
-              key={data.id}
+              key={data.key}
             >
             </ListItem>
           ))

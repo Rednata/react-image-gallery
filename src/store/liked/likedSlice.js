@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  liked: [],
+  liked: {},
   error: '',
 };
 
@@ -9,18 +9,23 @@ export const likedSlice = createSlice({
   name: 'liked',
   initialState,
   reducers: {
-    likedRequest: (state) => {
+    likedPostRequest: (state) => {
       state.error = '';
     },
-    likedRequestSuccess: (state, action) => {
+    likedPostRequestSuccess: (state, action) => {
+      state.liked = action.payload.photo;
+      state.error = '';
+    },
+    likedPostRequestError: (state, action) => {
+      state.liked = {};
+      state.error = action.payload.error;
+    },
+    updatePostLiked: (state, action) => {
+      state.loading = false;
       state.liked = action.payload.data;
       state.error = '';
     },
-    likedRequestError: (state, action) => {
-      state.auth = {};
-      state.error = action.payload.error;
-    },
-  }
+  },
 });
 
 export default likedSlice.reducer;

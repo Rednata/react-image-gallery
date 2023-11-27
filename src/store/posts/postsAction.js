@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { CLIENT_ID, URL_API } from '../../api/const';
 import { postsSlice } from './postsSlice';
@@ -6,15 +7,20 @@ import { getRandomID } from '../../utils/getRandomKey';
 
 export const postsRequestAsync = () => (dispatch, getState) => {
   const page = getState().posts.page;
+  const token = getState().token.token;
+
   const loading = getState().posts.loading;
 
   if (loading) return;
+
+  const urlPostsRequestHeaders =
+    token ? `Bearer ${token}` : `Client-ID ${CLIENT_ID}`;
 
   dispatch(postsSlice.actions.postsRequest());
 
   axios(`${URL_API}photos?&per_page=30&page=${page + 1}`, {
     headers: {
-      Authorization: `Client-ID ${CLIENT_ID}`
+      Authorization: urlPostsRequestHeaders
     }
   })
     .then(({ data }) => {
@@ -29,10 +35,10 @@ export const postsRequestAsync = () => (dispatch, getState) => {
             linkDownload: post.links.download,
             date: formatDate(post.created_at),
             likes: post.likes,
-            idImg: post.id,
+            id: post.id,
             liked: post.liked_by_user,
             altDescript: post.alt_description,
-            id: getRandomID(),
+            key: getRandomID(),
           });
       });
       dispatch(postsSlice.actions.postsRequestSuccess({ posts }));
