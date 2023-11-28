@@ -5,8 +5,8 @@ import { postsSlice } from './postsSlice';
 import { formatDate } from '../../utils/formatDate';
 import { getRandomID } from '../../utils/getRandomKey';
 
-export const postsRequestAsync = () => (dispatch, getState) => {
-  const page = getState().posts.page;
+export const postsRequestAsync = (begin) => (dispatch, getState) => {
+  const page = !begin ? getState().posts.page : 0;
   const token = getState().token.token;
 
   const loading = getState().posts.loading;
@@ -24,7 +24,6 @@ export const postsRequestAsync = () => (dispatch, getState) => {
     }
   })
     .then(({ data }) => {
-      console.log('data: ', data);
       const posts = data.map(post => {
         console.log();
         return (
@@ -41,7 +40,11 @@ export const postsRequestAsync = () => (dispatch, getState) => {
             key: getRandomID(),
           });
       });
-      dispatch(postsSlice.actions.postsRequestSuccess({ posts }));
+      if (begin) {
+        dispatch(postsSlice.actions.postsRequestSuccessBegin({ posts }));
+      } else {
+        dispatch(postsSlice.actions.postsRequestSuccess({ posts }));
+      }
     })
     .catch(error => {
       dispatch(postsSlice.actions.postsRequestError(error));

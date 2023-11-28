@@ -8,11 +8,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authSlice } from '../../../store/auth/authSlice';
 import { tokenSlice } from '../../../store/token/tokenSlice';
-// import iconLogin from './img/login.svg';
+import { postsRequestAsync } from '../../../store/posts/postsAction';
 
 export const Auth = () => {
-  // const token = useSelector(state => state.token.token);
-  const token = useToken();
+  useToken();
   const { auth } = useAuth();
   const dispatch = useDispatch();
 
@@ -21,6 +20,7 @@ export const Auth = () => {
   const getOut = () => {
     dispatch(authSlice.actions.clearAuth());
     dispatch(tokenSlice.actions.deleteToken());
+    dispatch(postsRequestAsync('begin'));
   };
 
   return (
@@ -35,7 +35,7 @@ export const Auth = () => {
         />
         <span className={style.name}>{auth.username}</span>
         {outBtn &&
-          <button onClick={getOut}>Logout</button>
+          <button className={style.btn_logout} onClick={getOut}>Logout</button>
         }
       </div> :
       <a

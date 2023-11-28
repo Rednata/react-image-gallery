@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
-import PropTypes, { bool } from 'prop-types';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import style from './ListItem.module.css';
@@ -10,13 +10,14 @@ export const ListItem = ({ data }) => {
 
   const styleBtnLiked = liked ? style.like__button_active : style.like__button;
 
+  const [changeLike, setChangeLike] = useState(0);
   const handleClick = () => {
-    console.log(1);
+    setChangeLike(changeLike + 1);
   };
 
   return (
     <div className={style.item}>
-      <Link to={`/img/${id}`}>
+      <Link to={`/images/img/${id}`}>
         <img className={style.img}
           src={img}
           alt={altDescript}
@@ -47,5 +48,5 @@ ListItem.propTypes = {
   author: PropTypes.string,
   date: PropTypes.string,
   likes: PropTypes.number,
-  liked: bool,
+  liked: PropTypes.bool,
 };

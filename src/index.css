@@ -26,3 +26,7 @@ body {
   min-width: 320px;
   color: #edcd51;
 }
+
+a, button {
+  cursor: pointer;
+}

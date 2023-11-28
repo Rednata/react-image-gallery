@@ -1,8 +1,10 @@
 .wrap {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px
+  gap: 5px;
+  cursor: pointer;
 }
 
 .link {
@@ -10,6 +12,18 @@
   padding: 5px 15px;
   border-radius: 6px;
   background-color: rgba(237, 205, 81, 0.1);
+}
+
+.btn_logout {
+  position: absolute;
+  border: 1px solid #edcd51;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: rgba(237, 205, 81, 0.1);
+  color:  #edcd51;
+  cursor: pointer;
+  bottom: -35px;
+  font-size: 14px;
 }
 
 .btn {

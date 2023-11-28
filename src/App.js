@@ -13,14 +13,14 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path='*' element = {
+      <Route path='/' element = {
         <>
           <Header />
           <Main />
         </>
       }>
       </Route>
-      <Route path='/img/:id' element = {
+      <Route path='/images/img/:id' element = {
         <UserImg />
       }>
       </Route>

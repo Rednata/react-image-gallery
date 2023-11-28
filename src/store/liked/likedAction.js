@@ -16,9 +16,8 @@ export const likedPostRequestAsync = (id, methed) => (dispatch, getState) => {
     }
   })
     .then(({ data: { photo } }) => {
-      console.log('posts: ', posts);
       dispatch(likedSlice.actions.likedPostRequestSuccess({ photo }));
-      const data = { likes: photo.likes, liked_by_user: photo.liked_by_user };
+      const data = { likes: photo.likes, liked: photo.liked_by_user };
       dispatch(likedSlice.actions.updatePostLiked({ data }));
     })
     .catch(error => console.log(error));

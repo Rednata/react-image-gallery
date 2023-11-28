@@ -5,6 +5,7 @@ import Masonry from 'react-masonry-css';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postsRequestAsync } from '../../../store/posts/postsAction';
+import { Loader } from '../../../UI/Loader';
 
 export const List = () => {
   const breakpointColumnsObj = {
@@ -25,7 +26,7 @@ export const List = () => {
         dispatch(postsRequestAsync());
       }
     }, {
-      rootMargin: '50px'
+      rootMargin: '10px'
     });
     observer.observe(endList.current);
 
@@ -35,6 +36,7 @@ export const List = () => {
       }
     };
   }, [endList.current]);
+
   return (
     <>
       <Masonry
@@ -42,7 +44,7 @@ export const List = () => {
         className={style.myMasonryGrid}
         columnClassName={style.myMasonryGrid_column}
       >
-        { !posts ? <p> LOADING....</p> :
+        { !posts.length ? <Loader /> :
           posts.map(data => (
             <ListItem
               data={data}
