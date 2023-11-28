@@ -28,7 +28,6 @@ export const useGetPostByID = (id) => {
           liked,
         });
         const data = { likes, liked };
-        console.warn('data: ', data);
         dispatch(likedSlice.actions.updatePostLiked({ data }));
       })
       .catch(error => {

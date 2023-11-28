@@ -17,5 +17,6 @@ export const useAuth = () => {
     if (!token) return;
     dispatch(postsRequestAsync('begin'));
   }, [auth]);
+
   return { auth };
 };

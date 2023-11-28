@@ -50,15 +50,15 @@ export const UserImg = () => {
                 </button>
                 {likes}</p>
             </div>
-            <button
+            {/* <button
               className={style.back}
               onClick={() => navigate('/')}
             >
               <BackIcon width={45} height={45} />
-            </button>
-            {/* <a href='/' className={style.back}>
+            </button> */}
+            <a href={navigate(-1)} className={style.back}>
               <BackIcon width={45} height={45} />
-            </a> */}
+            </a>
           </div>) :
           (<>
             <p className={style.textError}>Пожалуйста, авторизуйтесь для просмотра фотографий</p>
