@@ -1,5 +1,7 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import style from './UserImg.module.css';
 import classNames from 'classnames';
 import { ReactComponent as BackIcon } from './img/back.svg';
@@ -7,17 +9,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { likedPostRequestAsync } from '../../store/liked/likedAction';
 import Auth from '../Header/Auth';
-import { URL_API } from '../../api/const';
-import { getPostByID } from '../../utils/getPostByID';
+import { useGetPostByID } from '../../hooks/useGetPostByID';
 
 export const UserImg = () => {
   const { id } = useParams();
 
   const auth = useSelector(state => state.auth.auth);
-  const token = useSelector(state => state.token.token);
-
-  const posts = useSelector(state => state.posts.posts);
-  const { img, author, date, linkAuthor, likes, liked } = getPostByID(posts, id);
+  const { img, author, date, linkAuthor, likes, liked, descript } = useGetPostByID(id);
 
   const [pageLike, setPageLike] = useState(undefined);
   const [pageLikeCount, setPageLikeCount] = useState(null);
@@ -44,36 +42,38 @@ export const UserImg = () => {
     dispatch(likedPostRequestAsync(id, pageLike));
   };
 
-  const [download, setDownload] = useState(0);
+  const downloadClick = () => {
+    const link = document.createElement('a');
+    link.href = img;
+    link.download = 'image';
+    link.click();
+  };
 
-  const refImg = useRef(null);
+  // useEffect(() => {
+  //   if (!download) return;
 
-  useEffect(() => {
-    if (!download) return;
-
-    fetch(`${URL_API}photos/${id}/download`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(response => response.blob())
-      .then(blob => {
-        console.log(blob);
-        refImg.current.src = URL.createObjectURL(blob);
-        // const link = document.createElement('a');
-        // link.href = URL.createObjectURL(blob);
-        // link.download = 'img1';
-        // link.click();
-      })
-      .catch(error => console.log(error));
-  }, [download]);
+  //   fetch(`${URL_API}photos/${id}/download`, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   })
+  //     .then(response => response.json())
+  //     .then(imgHref => {
+  //       console.log('imgHref: ', (imgHref.url).replace(/\'/g, '0'));
+  //       const link = document.createElement('a');
+  //       link.href = (imgHref.url).replace(/\'/g, '0');
+  //       link.download = 'img1';
+  //       link.click();
+  //     })
+  //     .catch(error => console.log(error));
+  // }, [download]);
 
   return (
     <div className={style.container}>
       {auth.username ?
           (
           <div className={classNames(style.modal)}>
-            <img className={style.img} src={img} alt="" />
+            <img className={style.img} src={img} alt={descript} />
             <div className={style.info}>
               <a className={style.author} href={linkAuthor}>{author}</a>
               <p className={style.date} >{date}</p>
@@ -104,11 +104,10 @@ export const UserImg = () => {
 
             <button
               className={style.download}
-              onClick={() => setDownload(download + 1)}
+              onClick={downloadClick}
             >
               Download
             </button>
-            <img ref={refImg} src="" alt="" />
           </div>
           ) : (
           <>
