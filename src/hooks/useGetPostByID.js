@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { URL_API } from '../api/const';
 import { likedSlice } from '../store/liked/likedSlice';
+import { postsSlice } from '../store/posts/postsSlice';
 import { formatDate } from '../utils/formatDate';
 
 export const useGetPostByID = (id) => {
@@ -27,12 +28,14 @@ export const useGetPostByID = (id) => {
           likes,
           liked,
         });
-        const data = { likes, liked };
-        dispatch(likedSlice.actions.updatePostLiked({ data }));
+        // const data = { likes, liked };
+        // dispatch(likedSlice.actions.updatePostLiked({ data }));
+        // dispatch(postsSlice.actions.postsUpdate({ data }));
       })
       .catch(error => {
         console.log(error);
       });
   }, [id]);
+  console.warn('post: ', post);
   return post;
 };

@@ -4,6 +4,7 @@ import { getToken } from './api/token';
 import Header from './components/Header';
 import Main from './components/Main';
 import UserImg from './components/UserImg';
+import ErrorPage from './components/ErrorPage';
 import { tokenSlice } from './store/token/tokenSlice';
 
 export const App = () => {
@@ -22,6 +23,10 @@ export const App = () => {
       </Route>
       <Route path='/images/img/:id' element = {
         <UserImg />
+      }>
+      </Route>
+      <Route path='/error' element = {
+        <ErrorPage />
       }>
       </Route>
     </Routes>

@@ -30,6 +30,10 @@ export const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload.error;
     },
+    postsUpdate: (state, action) => {
+      console.log('action: ', action);
+      state.posts = [...action.payload.newPosts];
+    },
   }
 });
 

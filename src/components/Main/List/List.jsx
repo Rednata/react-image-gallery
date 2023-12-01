@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import style from './List.module.css';
 import ListItem from '../List/ListItem';
@@ -6,8 +7,10 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postsRequestAsync } from '../../../store/posts/postsAction';
 import { Loader } from '../../../UI/Loader';
+import { useNavigate } from 'react-router-dom';
 
 export const List = () => {
+  const navigate = useNavigate();
   const breakpointColumnsObj = {
     default: 5,
     1100: 3,
@@ -17,6 +20,12 @@ export const List = () => {
   const endList = useRef(null);
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.posts);
+
+  // const errorPage = useSelector(state => state.posts.error);
+  // if (errorPage.response.status === 403 ||
+  //   errorPage === undefined) {
+  //   navigate('/error');
+  // }
 
   useEffect(() => {
     if (!posts) return;
@@ -39,21 +48,21 @@ export const List = () => {
 
   return (
     <>
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className={style.myMasonryGrid}
-        columnClassName={style.myMasonryGrid_column}
-      >
-        { !posts.length ? <Loader /> :
-          posts.map(data => (
+      { !posts.length ? <Loader /> :
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className={style.myMasonryGrid}
+          columnClassName={style.myMasonryGrid_column}
+        >
+          {posts.map(data => (
             <ListItem
               data={data}
               key={data.key}
             >
             </ListItem>
-          ))
-        }
-      </Masonry>
+          ))}
+        </Masonry>
+      }
       <div ref={endList} className={style.endlist}></div>
     </>
 

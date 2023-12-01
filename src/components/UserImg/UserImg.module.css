@@ -81,3 +81,13 @@
   width: max-content;
   margin: 0 auto;
 }
+
+.download {
+  display: block;
+  border: 1px solid #edcd51;
+  padding: 5px 15px;
+  border-radius: 6px;
+  background-color: rgba(237, 205, 81, 0.1);
+  color: #edcd51;
+  margin-top: 20px;
+}

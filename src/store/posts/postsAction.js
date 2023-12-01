@@ -18,7 +18,7 @@ export const postsRequestAsync = (begin) => (dispatch, getState) => {
 
   dispatch(postsSlice.actions.postsRequest());
 
-  axios(`${URL_API}photos?&per_page=30&page=${page + 1}`, {
+  axios(`${URL_API}photos?&per_page=10&page=${page + 1}`, {
     headers: {
       Authorization: urlPostsRequestHeaders
     }
@@ -47,6 +47,9 @@ export const postsRequestAsync = (begin) => (dispatch, getState) => {
       }
     })
     .catch(error => {
-      dispatch(postsSlice.actions.postsRequestError(error));
+      if (error.request.status === 403) {
+        console.warn('error!!!!!!!!!!!!!!!!!!!!!!!! ', error);
+      }
+      dispatch(postsSlice.actions.postsRequestError({ error }));
     });
 };

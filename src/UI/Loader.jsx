@@ -8,7 +8,7 @@ export const Loader = () => {
       color='#edcd51'
       // loading={loading}
       cssOverride={{
-        margin: '0 auto',
+        margin: '100px auto',
       }}
       size={500}
       aria-label="Loading Spinner"

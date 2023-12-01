@@ -4,9 +4,7 @@
   justify-content: center;
   align-items: center;
   border: 3px solid #2D2D2D;
-  /* width: 32.8%; */
   border-radius: 10px;
-  /* border: 1px solid red; */
 }
 
 .img{
@@ -53,6 +51,10 @@
   line-height: 0;
   color: #fff;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;  
+  padding: 0;
   /* padding: 10px; */
 }
 
