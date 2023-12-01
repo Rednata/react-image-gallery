@@ -46,44 +46,4 @@ export const Auth = () => {
   );
 };
 
-// return (
-//   <div
-//     className={style.wrap}>
-//     {
-//       auth.username ?
-//       <>
-//         <img
-//           className={style.img}
-//           src={auth.imgIcon}
-//           alt={`Аватар ${auth.username}`}
-//         />
-//         <span className={style.name}>{auth.username}</span>
-//       </> :
-//       <a
-//         className={style.link}
-//         href={urlAuthCode}
-//       >
-//       LogIn</a>
-//     }
-// {/* <img className={style.img} src={iconLogin} alt="Аватар" /> */}
-
-// </div>
-{/* <> */}
-{/* {auth ?
-      <div className={style.wrap}>
-        <img
-          className={style.img}
-          src={auth.imgIcon}
-          alt={`Аватар ${auth.username}`}
-        />
-        <span className={style.name}>{auth.username}</span>
-        {/* <button className={style.btn}>LogOut</button> */}
-{/* </div> :
-      (<a
-        className={style.link}
-        href={urlAuthCode}
-      >
-        LogIn</a>)
-      }
-    </> */}
 

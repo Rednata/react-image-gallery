@@ -48,7 +48,7 @@ export const postsRequestAsync = (begin) => (dispatch, getState) => {
     })
     .catch(error => {
       if (error.request.status === 403) {
-        console.warn('error!!!!!!!!!!!!!!!!!!!!!!!! ', error);
+        console.warn('error!!!!!!!!! ', error);
       }
       dispatch(postsSlice.actions.postsRequestError({ error }));
     });

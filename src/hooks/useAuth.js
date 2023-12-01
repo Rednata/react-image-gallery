@@ -9,12 +9,12 @@ export const useAuth = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
+    if (!token || auth.username) return;
     dispatch(authRequestAsync());
   }, [token]);
 
   useEffect(() => {
-    if (!token) return;
+    if (!token || auth) return;
     dispatch(postsRequestAsync('begin'));
   }, [auth]);
 

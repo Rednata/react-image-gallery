@@ -16,8 +16,6 @@ export const ListItem = ({ data }) => {
   const [imgLikeCount, setImgLikeCount] = useState(null);
 
   const handleClick = () => {
-    console.log('imgLike: ', imgLike);
-    console.log('imgLikeCount: ', imgLikeCount);
     setChangeLike(changeLike + 1);
     if (imgLike === undefined) {
       setImgLike(!liked);

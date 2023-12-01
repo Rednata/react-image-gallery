@@ -18,7 +18,6 @@ export const tokenRequestAsync = (urlToken) => (dispatch, getState) => {
     method: 'POST'
   })
     .then(({ data: { access_token: token } }) => {
-      // localStorage.setItem('token', token);
       dispatch(tokenSlice.actions.tokenRequestSuccess({ token }));
     })
     .catch(error =>

@@ -1,16 +1,14 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import React, { useState, useEffect, useRef } from 'react';
 import style from './UserImg.module.css';
 import classNames from 'classnames';
 import { ReactComponent as BackIcon } from './img/back.svg';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { likedPostRequestAsync } from '../../store/liked/likedAction';
 import Auth from '../Header/Auth';
 import { URL_API } from '../../api/const';
 import { getPostByID } from '../../utils/getPostByID';
-import { postsRequestAsync } from '../../store/posts/postsAction';
 
 export const UserImg = () => {
   const { id } = useParams();
@@ -33,30 +31,17 @@ export const UserImg = () => {
     setChangeLikes(changeLikes + 1);
     if (pageLike === undefined) {
       setPageLike(!liked);
+      setPageLikeCount(liked ? likes - 1 : likes + 1);
     } else {
       setPageLike(!pageLike);
-    }
-    if (pageLikeCount === null) {
-      if (liked) {
-        setPageLikeCount(likes - 1);
-      } else {
-        setPageLikeCount(likes + 1);
-      }
-    } else {
-      if (pageLike) {
-        setPageLikeCount(pageLikeCount - 1);
-      } else {
-        setPageLikeCount(pageLikeCount + 1);
-      }
+      setPageLikeCount(!pageLike ? pageLikeCount + 1 : pageLikeCount - 1);
     }
   };
 
   const handleBackBtnClick = () => {
     navigate('/');
-    dispatch(likedPostRequestAsync(id, (pageLike !== undefined) ? pageLike : liked));
-    console.log('pageLike: ', pageLike);
-    console.log('liked: ', liked);
-    dispatch(postsRequestAsync('begin'));
+    if (pageLike === undefined) return;
+    dispatch(likedPostRequestAsync(id, pageLike));
   };
 
   const [download, setDownload] = useState(0);
