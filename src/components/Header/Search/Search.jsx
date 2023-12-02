@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postsRequestAsync } from '../../../store/posts/postsAction';
 import { postsSlice } from '../../../store/posts/postsSlice';
@@ -16,10 +16,15 @@ export const Search = () => {
   };
 
   const autofocus = () => {
+    console.log(inputRef);
     setTimeout(() => {
       inputRef.current.focus();
     }, 0);
   };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const submitSearch = (e) => {
     e.preventDefault();
