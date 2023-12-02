@@ -5,6 +5,7 @@ const initialState = {
   page: 0,
   error: '',
   loading: false,
+  search: 'last',
 };
 
 export const postsSlice = createSlice({
@@ -32,6 +33,9 @@ export const postsSlice = createSlice({
     },
     postsUpdate: (state, action) => {
       state.posts = [...action.payload.newPosts];
+    },
+    searchUpdate: (state, action) => {
+      state.search = action.payload.value;
     },
   }
 });

@@ -29,7 +29,6 @@ export const ListItem = ({ data }) => {
   useEffect(() => {
     console.log();
     if (imgLike === undefined) return;
-    console.log('id, imgLike = ', id, imgLike);
     dispatch(likedPostRequestAsync(id, imgLike));
   }, [changeLike]);
 

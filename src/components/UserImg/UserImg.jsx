@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './UserImg.module.css';
 import classNames from 'classnames';
 import { ReactComponent as BackIcon } from './img/back.svg';
@@ -36,11 +36,10 @@ export const UserImg = () => {
     }
   };
 
-  const handleBackBtnClick = () => {
-    navigate('/');
+  useEffect(() => {
     if (pageLike === undefined) return;
     dispatch(likedPostRequestAsync(id, pageLike));
-  };
+  }, [pageLike]);
 
   const downloadClick = () => {
     const link = document.createElement('a');
@@ -48,25 +47,6 @@ export const UserImg = () => {
     link.download = 'image';
     link.click();
   };
-
-  // useEffect(() => {
-  //   if (!download) return;
-
-  //   fetch(`${URL_API}photos/${id}/download`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(imgHref => {
-  //       console.log('imgHref: ', (imgHref.url).replace(/\'/g, '0'));
-  //       const link = document.createElement('a');
-  //       link.href = (imgHref.url).replace(/\'/g, '0');
-  //       link.download = 'img1';
-  //       link.click();
-  //     })
-  //     .catch(error => console.log(error));
-  // }, [download]);
 
   return (
     <div className={style.container}>
@@ -97,7 +77,7 @@ export const UserImg = () => {
             </div>
             <button
               className={style.back}
-              onClick={handleBackBtnClick}
+              onClick={() => navigate('/')}
             >
               <BackIcon width={45} height={45} />
             </button>

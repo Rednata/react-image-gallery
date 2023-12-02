@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  position: relative;
+  height: 30px; 
+  min-width: 300px;
+  border-radius: 6px;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  border-radius: 6px;
+  outline-color: #edcd51;
+  padding-left: 10px;
+  font-size: 18px;
+  color: #2D2D2D;
+  outline-offset: -2px; /* 2 */
+  background-color: #edcd51;
+}
+
+input:placeholder {
+  color: rgba(45, 45, 45, 0.5);
+}
+
+input[type='search']::-webkit-search-decoration, 
+input[type='search']::-webkit-search-cancel-button, 
+input[type='search']::-webkit-search-results-button, 
+input[type='search']::-webkit-search-results-decoration {
+	display: none;
+}
+
+.button {  
+  position: absolute;
+  top: 0;  
+  height: 100%;
+  border: none;
+  background-color: transparent;  
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  padding: 10px;
+  margin-right: 5px;
+  outline: none;
+  cursor: pointer;
+}

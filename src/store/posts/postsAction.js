@@ -9,6 +9,7 @@ export const postsRequestAsync = (begin) => (dispatch, getState) => {
   const page = !begin ? getState().posts.page : 0;
   const token = getState().token.token;
 
+  const search = getState().posts.search;
   const loading = getState().posts.loading;
 
   if (loading) return;
@@ -18,13 +19,14 @@ export const postsRequestAsync = (begin) => (dispatch, getState) => {
 
   dispatch(postsSlice.actions.postsRequest());
 
-  axios(`${URL_API}photos?&per_page=10&page=${page + 1}`, {
-    headers: {
-      Authorization: urlPostsRequestHeaders
-    }
-  })
-    .then(({ data }) => {
-      const posts = data.map(post => {
+  axios(`${URL_API}search/photos?per_page=30&page=${page + 1}&query=${search}`,
+    {
+      headers: {
+        Authorization: urlPostsRequestHeaders
+      }
+    })
+    .then(({ data: { results } }) => {
+      const posts = results.map(post => {
         console.log();
         return (
           { img: post.urls.small_s3,
@@ -47,9 +49,6 @@ export const postsRequestAsync = (begin) => (dispatch, getState) => {
       }
     })
     .catch(error => {
-      if (error.request.status === 403) {
-        console.warn('error!!!!!!!!! ', error);
-      }
       dispatch(postsSlice.actions.postsRequestError({ error }));
     });
 };
