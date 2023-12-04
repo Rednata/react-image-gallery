@@ -2,7 +2,7 @@ export const URL_API = 'https://api.unsplash.com/';
 export const URL_AUTH_TOKEN = 'https://unsplash.com/oauth/token?';
 export const URL_AUTH = 'https://unsplash.com/oauth/authorize?';
 
-export const REDIRECT_URI = 'http://localhost:3001/';
+export const REDIRECT_URI = 'https://react-image-gallery-oie4.onrender.com/';
 export const RESPONSE_TYPE = 'code';
 export const SCOPE = 'public read_user read_photos write_likes';
 export const CLIENT_ID = 'RfgC8IPCosWK7xK4YRhwts80gFZcCUfH1WTKVn-nDpI';
