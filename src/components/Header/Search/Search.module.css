@@ -18,7 +18,7 @@
   background-color: #edcd51;
 }
 
-input:placeholder {
+.input:placeholder {
   color: rgba(45, 45, 45, 0.5);
 }
 

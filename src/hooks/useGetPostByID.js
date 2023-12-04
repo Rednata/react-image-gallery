@@ -23,7 +23,7 @@ export const useGetPostByID = (id) => {
           liked: data.liked_by_user,
           linkAuthor: data.user.links.self,
           author: data.user.name,
-          descript: data.description,
+          altDescript: data.alt_description,
         });
       })
       .catch(error => console.log(error));

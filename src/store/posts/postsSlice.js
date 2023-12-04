@@ -5,7 +5,7 @@ const initialState = {
   page: 0,
   error: '',
   loading: false,
-  search: 'last',
+  search: 'christmas',
 };
 
 export const postsSlice = createSlice({

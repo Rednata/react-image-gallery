@@ -15,7 +15,7 @@ export const UserImg = () => {
   const { id } = useParams();
 
   const auth = useSelector(state => state.auth.auth);
-  const { img, author, date, linkAuthor, likes, liked, descript } = useGetPostByID(id);
+  const { img, author, date, linkAuthor, likes, liked, altDescript } = useGetPostByID(id);
 
   const [pageLike, setPageLike] = useState(undefined);
   const [pageLikeCount, setPageLikeCount] = useState(null);
@@ -53,7 +53,7 @@ export const UserImg = () => {
       {auth.username ?
           (
           <div className={classNames(style.modal)}>
-            <img className={style.img} src={img} alt={descript} />
+            <img className={style.img} src={img} alt={altDescript} />
             <div className={style.info}>
               <a className={style.author} href={linkAuthor}>{author}</a>
               <p className={style.date} >{date}</p>

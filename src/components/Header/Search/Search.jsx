@@ -15,13 +15,6 @@ export const Search = () => {
     setValue(inputRef.current.value);
   };
 
-  const autofocus = () => {
-    console.log(inputRef);
-    setTimeout(() => {
-      inputRef.current.focus();
-    }, 0);
-  };
-
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -46,7 +39,6 @@ export const Search = () => {
         ref={inputRef}
         onChange={handleChange}
         value={value}
-        onFocus={autofocus}
       />
       <button className={style.button} type="submit" />
     </form>
