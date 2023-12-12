@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { likedPostRequestAsync } from '../../../../store/liked/likedAction';
 
@@ -14,15 +14,24 @@ export const ListItem = ({ data }) => {
   const [changeLike, setChangeLike] = useState(0);
   const [imgLike, setImgLike] = useState(undefined);
   const [imgLikeCount, setImgLikeCount] = useState(null);
+  const auth = useSelector(state => state.auth.auth);
+  const [infoblock, setInfoblock] = useState(false);
 
   const handleClick = () => {
-    setChangeLike(changeLike + 1);
-    if (imgLike === undefined) {
-      setImgLike(!liked);
-      setImgLikeCount(liked ? likes - 1 : likes + 1);
+    if (auth.username) {
+      setChangeLike(changeLike + 1);
+      if (imgLike === undefined) {
+        setImgLike(!liked);
+        setImgLikeCount(liked ? likes - 1 : likes + 1);
+      } else {
+        setImgLike(!imgLike);
+        setImgLikeCount(!imgLike ? imgLikeCount + 1 : imgLikeCount - 1);
+      }
     } else {
-      setImgLike(!imgLike);
-      setImgLikeCount(!imgLike ? imgLikeCount + 1 : imgLikeCount - 1);
+      setInfoblock(true);
+      setTimeout(() => {
+        setInfoblock(false);
+      }, 2000);
     }
   };
 
@@ -55,7 +64,14 @@ export const ListItem = ({ data }) => {
                 )
               }
               onClick={handleClick}
+              // disabled={!auth.username}
             >
+              {infoblock &&
+              <span className={style.infoblock}>
+                <span className={style.info1}>Лайк?</span>
+                <span className={style.info1}>Авторизуйся!</span>
+              </span>
+              }
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.41337 13.8733C8.18671 13.9533 7.81337 13.9533 7.58671 13.8733C5.65337 13.2133 1.33337 10.46 1.33337 5.79332C1.33337 3.73332 2.99337 2.06665 5.04004 2.06665C6.25337 2.06665 7.32671 2.65332 8.00004 3.55998C8.67337 2.65332 9.75337 2.06665 10.96 2.06665C13.0067 2.06665 14.6667 3.73332 14.6667 5.79332C14.6667 10.46 10.3467 13.2133 8.41337 13.8733Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

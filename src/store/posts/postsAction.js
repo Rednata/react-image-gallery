@@ -4,6 +4,7 @@ import { CLIENT_ID, URL_API } from '../../api/const';
 import { postsSlice } from './postsSlice';
 import { formatDate } from '../../utils/formatDate';
 import { getRandomID } from '../../utils/getRandomKey';
+import { loadImg } from '../../UI/loadImg';
 
 export const postsRequestAsync = (begin) => (dispatch, getState) => {
   const page = !begin ? getState().posts.page : 0;

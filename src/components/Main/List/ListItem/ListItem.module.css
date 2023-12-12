@@ -5,6 +5,7 @@
   align-items: center;
   border: 3px solid #2D2D2D;
   border-radius: 10px;
+  min-height: 10vw;
 }
 
 .img{
@@ -43,6 +44,7 @@
 }
 
 .like__button {  
+  position: relative;
   background-color: transparent;
   border: none;
   line-height: 0;
@@ -79,4 +81,25 @@
   .item {
     /* width: 100%; */
   }
+}
+
+.infoblock {
+  position: absolute;
+  display: block;
+  padding: 10px;
+  border: 1px solid #edcd51;
+  background-color: #2D2D2D;
+  top: 0;
+  color: #edcd51;
+  font-size: 12px;
+  top: -120%;
+  right: 50%;
+  transform: translateX(50%);
+  height: 15px;
+  border-radius: 10px;;
+}
+
+.info1 {
+  display: block;
+  height: 15px;
 }

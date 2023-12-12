@@ -13,6 +13,7 @@ import { postsRequestAsync } from '../../../store/posts/postsAction';
 export const Auth = () => {
   useToken();
   const { auth } = useAuth();
+  console.log('auth: ', auth);
   const dispatch = useDispatch();
 
   const [outBtn, setOutBtn] = useState(false);

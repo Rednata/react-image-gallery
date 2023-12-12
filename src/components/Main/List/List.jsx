@@ -21,6 +21,11 @@ export const List = () => {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.posts);
 
+  // Promise.all(
+  //   posts.map(loadImg)
+  // )
+  //   .then(data => console.log(data));
+
   // const errorPage = useSelector(state => state.posts.error);
   // if (errorPage.response.status === 403 ||
   //   errorPage === undefined) {
